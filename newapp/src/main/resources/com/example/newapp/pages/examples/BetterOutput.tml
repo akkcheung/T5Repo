@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+     We use a "strict" DTD to make IE follow the alignment rules. -->
+     
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
+<body class="container">
+    <h3>Better Output</h3>
+
+    As Tapestry generates, or <em>renders</em>, a page, it will call the page's 
+    <code>setupRender()</code> method if the page has one.<br/>
+    When a field is annotated with <code>@Property</code>, Tapestry creates getter and setter methods for it at runtime.<br/>
+    
+    <div class="eg">
+        <p>
+        ${message}<br/>
+        ${message}<br/>
+        ${message}<br/>
+        </p>
+        <t:pagelink t:page="examples/BetterOutput" href="#">Refresh</t:pagelink>
+    </div>
+
+    In the previous example we used <code>getMessage()</code> to generate a message. 
+    In this example we used <code>setupRender()</code> to generate a value for the <code>message</code> field which is 
+    annotated with <code>@Property</code>. The result is that despite being referenced 3 times, message is generated only once. <br/><br/>
+    
+    References: 
+    <a href="http://tapestry.apache.org/component-rendering.html#ComponentRendering-SetupRender">SetupRender</a>, 
+    <a href="http://tapestry.apache.org/5.4/apidocs/org/apache/tapestry5/annotations/Property.html">@Property</a>, 
+    <a href="http://tapestry.apache.org/component-parameters.html#ComponentParameters-Context%3ABindings">Context: Bindings</a>, 
+    <a href="http://tapestry.apache.org/component-templates.html#ComponentTemplates-Expansions">Expansions</a>, 
+    <a href="http://tapestry.apache.org/component-parameters.html#ComponentParameters-bindingexpressions">Binding Expressions</a>.<br/><br/>
+    
+    <t:pagelink page="Index" href="#">Home</t:pagelink><br/><br/>
+
+	<!-- 
+    <t:tabgroup>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/BetterOutput.tml"/>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/BetterOutput.java"/>
+        <t:sourcecodetab src="/web/src/main/resources/META-INF/assets/css/examples/olive.css"/>
+    </t:tabgroup>
+     -->
+    
+</body>
+</html>

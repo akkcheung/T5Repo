@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<body class="container">
+    <h3>Editable Grid (1)</h3>
+
+    A table built with a Form around a Grid to allow creation of up to ${LIST_SIZE} persons.
+    
+    <div class="eg">
+        <t:form t:id="personsCreate">
+            <t:errors globalOnly="true"/>
+            <t:grid source="persons" row="person" model="model" include="firstname,lastname,region,startdate">
+                <p:firstNameCell>
+                    <t:textfield t:id="firstName" value="person.firstName" t:validate="maxlength=10"/>
+                </p:firstNameCell>
+                <p:lastNameCell>
+                    <t:textfield t:id="lastName" value="person.lastName" t:validate="maxlength=10"/>
+                </p:lastNameCell>
+                <p:regionCell>
+                    <t:select t:id="region" value="person.region"/>
+                </p:regionCell>
+                <p:startDateCell>
+                    <t:datefield t:id="startDate" class="date" value="person.startDate" format="prop:dateFormat"/>
+                </p:startDateCell>
+            </t:grid>
+            <t:submit value="Save"/>
+            <t:eventlink event="refresh" class="btn btn-default">Refresh</t:eventlink>
+        </t:form>
+    </div>
+
+    <p>Grid doesn't support JSR-303 validation, so we're demonstrating 3 workarounds:</p>
+    <ul>
+        <li>Client-side, we're validating field lengths with traditional Tapestry validators specified in the template.</li>
+        <li>Server-side, we're invoking the validator for each field, which includes JSR-303 validation.</li>
+        <li>Server-side, we're checking First Name is not <em>${BAD_NAME}</em>, which is a custom validation.</li>
+    </ul> 
+
+    For more flexibility, see the Editable Loop examples.<br/><br/>
+    
+    References: 
+    <a href="http://tapestry.apache.org/5.4/apidocs/org/apache/tapestry5/corelib/components/Grid.html">Grid</a>,
+    <a href="http://tapestry.apache.org/forms-and-validation.html">Forms and Validation</a>.<br/><br/> 
+    
+    <t:pagelink page="Index">Home</t:pagelink><br/><br/>
+    
+    The source for IPersonFinderServiceLocal and @EJB is shown in the Session Beans and @EJB examples.<br/><br/>
+
+    <t:tabgroup>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableGrid1.tml"/>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableGrid1.java"/>
+        <t:sourcecodetab src="/web/src/main/resources/META-INF/assets/css/examples/editablegrid.css"/>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/commons/FieldCopy.java"/>
+        <t:sourcecodetab src="/business/src/main/java/jumpstart/business/domain/person/Person.java"/>
+        <t:sourcecodetab src="/business/src/main/java/jumpstart/business/domain/person/Regions.java"/>
+    </t:tabgroup>
+</body>
+</html>
