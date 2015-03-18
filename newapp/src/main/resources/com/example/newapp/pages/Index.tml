@@ -46,10 +46,12 @@
     	<li><t:pagelink page="address/create">Create new address</t:pagelink></li>
 	</ul>
 
+	 
 	<t:grid source="addresses"
        	include="honorific,firstName,lastName,street1,city,state,zip,phone"/>
 
 	<h1>Jump Start</h1>
+	
 	
 	<ul>
     	<li><t:pagelink page="BootstrapStyling">Bootstrap Styling</t:pagelink></li>

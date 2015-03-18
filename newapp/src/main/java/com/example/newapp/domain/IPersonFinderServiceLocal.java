@@ -1,8 +1,11 @@
-package com.example.newapp.entities;
+package com.example.newapp.domain;
 
 import java.util.List;
 
-public interface IPersonFinderServiceRemote {
+import com.example.newapp.data.Regions;
+import com.example.newapp.util.SortCriterion;
+
+public interface IPersonFinderServiceLocal {
 	// Person
 
     Person findPerson(Long id);

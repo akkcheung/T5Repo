@@ -76,12 +76,14 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <scope>provided</scope>
         </dependency>
  
- 		<!-- Using Tapestry With Hibernate -->       
+ 		<!-- Using Tapestry With Hibernate -->
+ 		<!-- 
         <dependency>
  	       <groupId>org.apache.tapestry</groupId>
     	    <artifactId>tapestry-hibernate</artifactId>
         	<version>${tapestry-release-version}</version>
     	</dependency>
+         --> 
          
         <dependency>
 	        <groupId>org.hsqldb</groupId>
@@ -95,7 +97,45 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
 			<version>1.0.0.GA</version>
 		</dependency>
     	
-
+    	<!-- 
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<version>3.0</version>
+		</dependency>
+		 -->
+		
+		<!-- Using Tapestry With Jpa -->
+		<dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-jpa</artifactId>
+            <version>${tapestry-release-version}</version>
+        </dependency>
+			
+		
+		<!--   
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
+		-->
+		
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.8.Final</version>
+		</dependency>	
+		
+		<!-- 
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		 -->
+		
     </dependencies>
     <build>
         <finalName>newapp</finalName>

@@ -3,15 +3,22 @@ package com.example.newapp.services;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
+
+import com.example.newapp.domain.IPersonFinderServiceLocal;
+import com.example.newapp.domain.PersonFinderService;
+
+import org.apache.tapestry5.jpa.JpaEntityPackageManager;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -27,6 +34,10 @@ public class AppModule
         // Use service builder methods (example below) when the implementation
         // is provided inline, or requires more initialization than simply
         // invoking the constructor.
+    	
+
+    	binder.bind(IPersonFinderServiceLocal.class, PersonFinderService.class);
+    	
     }
 
     public static void contributeFactoryDefaults(
@@ -39,6 +50,8 @@ public class AppModule
         // (a random hexadecimal number), but may be further overriden by DevelopmentModule or
         // QaModule.
         configuration.override(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT");
+        
+        
     }
 
     public static void contributeApplicationDefaults(
@@ -115,5 +128,13 @@ public class AppModule
         // within the pipeline.
 
         configuration.add("Timing", filter);
+    }
+    
+    @Contribute(JpaEntityPackageManager.class)
+    public static void providePackages(Configuration<String> configuration) {
+  
+       configuration.add("com.example.newapp.domain");
+       // configuration.add("com.example.newapp.entities");
+       
     }
 }
