@@ -4,14 +4,16 @@
      
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
 <body class="container">
-    <h3>Easy Output (Using BeanDisplay)</h3>
+    <h3>Easy Output (Entity Bean)</h3>
     
-    Tapestry's BeanDisplay component lets you display a <a href="http://en.wikipedia.org/wiki/JavaBeans">JavaBean</a> 
-    with very little effort. The bean in this example is this page!
+    BeanDisplay can display JPA Entity Beans because they, too, are JavaBeans.<br/>
     
     <div class="eg">
-        <t:beandisplay object="this" reorder="name,age,gender"/>
+        <t:beandisplay object="person"/>
     </div>
+    
+    This bean is Person 1 retrieved from the database by PersonFinderService.  
+    The source for IPersonFinderServiceLocal and @EJB is shown in the Session Beans and @EJB examples.<br/><br/>
     
     References: 
     <a href="http://tapestry.apache.org/5.4/apidocs/org/apache/tapestry5/corelib/components/BeanDisplay.html">BeanDisplay</a>,
@@ -21,9 +23,11 @@
 
 	<!-- 
     <t:tabgroup>
-        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutput.tml"/>
-        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutput.java"/>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutputEntityBean.tml"/>
+        <t:sourcecodetab src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutputEntityBean.java"/>
         <t:sourcecodetab src="/web/src/main/resources/META-INF/assets/css/examples/plain.css"/>
+        <t:sourcecodetab src="/business/src/main/java/jumpstart/business/domain/person/Person.java"/>
+        <t:sourcecodetab src="/business/src/main/java/jumpstart/business/domain/person/Regions.java"/>
     </t:tabgroup>
      -->
      

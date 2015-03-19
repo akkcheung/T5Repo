@@ -1,4 +1,4 @@
-package com.example.newapp.domain;
+package com.example.newapp.entities;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -15,8 +15,8 @@ import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 
-import com.example.newapp.domain.IPersonFinderServiceLocal;
-import com.example.newapp.domain.PersonFinderService;
+import com.example.newapp.entities.IPersonFinderServiceLocal;
+import com.example.newapp.entities.PersonFinderService;
 
 import org.apache.tapestry5.jpa.JpaEntityPackageManager;
 
