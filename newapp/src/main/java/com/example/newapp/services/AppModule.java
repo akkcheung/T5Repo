@@ -9,6 +9,7 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.services.ThreadLocale;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
@@ -17,6 +18,10 @@ import org.slf4j.Logger;
 
 import com.example.newapp.entities.IPersonFinderServiceLocal;
 import com.example.newapp.entities.PersonFinderService;
+import com.example.newapp.util.MoneyTranslator;
+import com.example.newapp.util.YesNoTranslator;
+import com.example.newapp.validators.Letters;
+import com.examples.newapp.services.CountryNames;
 
 import org.apache.tapestry5.jpa.JpaEntityPackageManager;
 
@@ -37,6 +42,7 @@ public class AppModule
     	
 
     	binder.bind(IPersonFinderServiceLocal.class, PersonFinderService.class);
+    	binder.bind(CountryNames.class);    	
     	
     }
 
@@ -136,5 +142,21 @@ public class AppModule
        configuration.add("com.example.newapp.domain");
        // configuration.add("com.example.newapp.entities");
        
+    }
+    
+    // Tell Tapestry about our custom translators, validators, and their message files.
+    // We do this by contributing configuration to Tapestry's TranslatorAlternatesSource service, FieldValidatorSource
+    // service, and ComponentMessagesSource service.
+
+    @SuppressWarnings("rawtypes")
+    public static void contributeTranslatorAlternatesSource(MappedConfiguration<String, Translator> configuration,
+            ThreadLocale threadLocale) {
+        configuration.add("yesno", new YesNoTranslator("yesno"));
+        configuration.add("money2", new MoneyTranslator("money2", 2, threadLocale));
+    }
+    
+    @SuppressWarnings("rawtypes")
+    public static void contributeFieldValidatorSource(MappedConfiguration<String, Validator> configuration) {
+        configuration.add("letters", new Letters());
     }
 }
