@@ -19,17 +19,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import com.example.newapp.data.Regions;
 import com.example.newapp.util.SortCriterion;
 
-/*
-@Stateless
-@Local(IPersonFinderServiceLocal.class)
-@Remote(IPersonFinderServiceRemote.class)
-*/
+
 
 public class PersonFinderService implements IPersonFinderServiceLocal {
 
-	// @PersistenceContext(unitName = "jumpstart")
-	
-	@PersistenceContext(unitName = "jumpstart")
 	@Inject
     private EntityManager em;
 	

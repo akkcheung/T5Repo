@@ -5,10 +5,12 @@ import java.io.IOException;
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ThreadLocale;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
@@ -17,13 +19,16 @@ import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 
 import com.example.newapp.entities.IPersonFinderServiceLocal;
+import com.example.newapp.entities.IPersonManagerServiceLocal;
 import com.example.newapp.entities.PersonFinderService;
+import com.example.newapp.entities.PersonManagerService;
 import com.example.newapp.util.MoneyTranslator;
 import com.example.newapp.util.YesNoTranslator;
 import com.example.newapp.validators.Letters;
 import com.examples.newapp.services.CountryNames;
 
 import org.apache.tapestry5.jpa.JpaEntityPackageManager;
+import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -41,8 +46,12 @@ public class AppModule
         // invoking the constructor.
     	
 
+    	//2015.03
     	binder.bind(IPersonFinderServiceLocal.class, PersonFinderService.class);
-    	binder.bind(CountryNames.class);    	
+    	
+    	// binder.bind(CountryNames.class);    	
+    	
+    	binder.bind(IPersonManagerServiceLocal.class, PersonManagerService.class);
     	
     }
 
@@ -136,6 +145,8 @@ public class AppModule
         configuration.add("Timing", filter);
     }
     
+    //2015.03
+    
     @Contribute(JpaEntityPackageManager.class)
     public static void providePackages(Configuration<String> configuration) {
   
@@ -158,5 +169,13 @@ public class AppModule
     @SuppressWarnings("rawtypes")
     public static void contributeFieldValidatorSource(MappedConfiguration<String, Validator> configuration) {
         configuration.add("letters", new Letters());
+    }
+    
+    @Match("*IPersonManagerServiceLocal")
+    public static void adviseTransactionally(
+          JpaTransactionAdvisor advisor,
+          MethodAdviceReceiver receiver) {
+  
+    		advisor.addTransactionCommitAdvice(receiver);
     }
 }
