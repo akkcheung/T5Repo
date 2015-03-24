@@ -1,4 +1,4 @@
-package com.examples.newapp.services;
+package com.example.newapp.services;
 
 
 import java.util.Collections;

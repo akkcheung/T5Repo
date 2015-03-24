@@ -16,6 +16,8 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.jpa.JpaEntityPackageManager;
+import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.slf4j.Logger;
 
 import com.example.newapp.entities.IPersonFinderServiceLocal;
@@ -25,10 +27,8 @@ import com.example.newapp.entities.PersonManagerService;
 import com.example.newapp.util.MoneyTranslator;
 import com.example.newapp.util.YesNoTranslator;
 import com.example.newapp.validators.Letters;
-import com.examples.newapp.services.CountryNames;
-
-import org.apache.tapestry5.jpa.JpaEntityPackageManager;
-import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
+import com.example.newapp.web.services.SelectIdModelFactory;
+import com.example.newapp.web.services.SelectIdModelFactoryImpl;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -53,6 +53,7 @@ public class AppModule
     	
     	binder.bind(IPersonManagerServiceLocal.class, PersonManagerService.class);
     	
+    	binder.bind(SelectIdModelFactory.class, SelectIdModelFactoryImpl.class);
     }
 
     public static void contributeFactoryDefaults(
