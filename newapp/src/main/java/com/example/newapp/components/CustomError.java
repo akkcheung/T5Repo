@@ -9,6 +9,16 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.services.Heartbeat;
 import org.apache.tapestry5.dom.Element;
 
+/**
+ * CustomError must be used in conjunction with CustomForm, not Form.
+ * 
+ * Like Label, CustomError is a component that you associate with a field, eg. a TextField. Unlike Label, it generates
+ * an empty span element. When CustomError.js detects a client-side validation error in the associated field, it puts
+ * the message in the span element, sets the span's class to "msg" and the span's parent's class to "error-msg".
+ * 
+ */
+
+// The @Import tells Tapestry to put a link to the file in the head of the page so that the browser will pull it in. 
 @Import(library = "CustomError.js")
 public class CustomError {
 	// Parameters

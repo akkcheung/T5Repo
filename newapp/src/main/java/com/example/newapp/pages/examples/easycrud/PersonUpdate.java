@@ -1,4 +1,4 @@
-package com.example.newapp.pages.examples.input;
+package com.example.newapp.pages.examples.easycrud;
 
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.annotations.Component;
@@ -8,16 +8,15 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.example.newapp.components.CustomForm;
-
 import com.example.newapp.entities.IPersonFinderServiceLocal;
 import com.example.newapp.entities.IPersonManagerServiceLocal;
 import com.example.newapp.entities.Person;
 import com.example.newapp.util.ExceptionUtil;
 
-public class TotalControlEdit1 {
+public class PersonUpdate {
+	 // The activation context
 
-    // The activation context
-
+    @Property
     private Long personId;
 
     // Screen fields
@@ -34,14 +33,12 @@ public class TotalControlEdit1 {
     // Other pages
 
     @InjectPage
-    private TotalControlEdit2 page2;
+    private Persons indexPage;
 
     // Generally useful bits and pieces
 
-    
-    @Component(id = "f_person")
-    private CustomForm form;
-	
+    @Component(id = "personForm")
+    private CustomForm personForm;
 
     //@EJB
     @Inject
@@ -65,29 +62,39 @@ public class TotalControlEdit1 {
         this.personId = personId;
     }
 
-    // Form bubbles up the PREPARE_FOR_RENDER event during form render.
+    // PersonForm bubbles up the PREPARE_FOR_RENDER event during form render.
 
-    void onPrepareForRender() throws Exception {
-        person = findPerson(personId);
+    void onPrepareForRender() {
+        person = personFinderService.findPerson(personId);
+        // Handle null person in the template.
 
         // If the form has errors then we're redisplaying after a redirect.
         // Form will restore your input values but it's up to us to restore Hidden values.
 
-        if (form.getHasErrors()) {
-            person.setVersion(versionFlash);
+        if (personForm.getHasErrors()) {
+            if (person != null) {
+                person.setVersion(versionFlash);
+            }
         }
     }
 
-    // Form bubbles up the PREPARE_FOR_SUBMIT event during form submission.
+    // PersonForm bubbles up the PREPARE_FOR_SUBMIT event during form submission.
 
-    void onPrepareForSubmit() throws Exception {
+    void onPrepareForSubmit() {
         // Get objects for the form fields to overlay.
-        person = findPerson(personId);
+        person = personFinderService.findPerson(personId);
+
+        if (person == null) {
+            person = new Person();
+            personForm.recordError("Person has been deleted by another process.");
+        }
     }
 
-    void onValidateFromPerson() {
+    // PersonForm bubbles up the VALIDATE event when it is submitted
 
-        if (form.getHasErrors()) {
+    void onValidateFromPersonForm() {
+
+        if (personForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;
         }
@@ -97,36 +104,17 @@ public class TotalControlEdit1 {
         }
         catch (Exception e) {
             // Display the cause. In a real system we would try harder to get a user-friendly message.
-            form.recordError(ExceptionUtil.getRootCauseMessage(e));
+            personForm.recordError(ExceptionUtil.getRootCauseMessage(e));
         }
     }
 
+    // PersonForm bubbles up SUCCESS or FAILURE when it is submitted, depending on whether VALIDATE records an error
+
     Object onSuccess() {
-        page2.set(personId);
-        return page2;
+        return indexPage;
     }
 
     void onFailure() {
         versionFlash = person.getVersion();
-    }
-
-    void onRefresh() {
-        // By doing nothing the page will be displayed afresh.
-    }
-
-    private Person findPerson(Long personId) throws Exception {
-        // Ask business service to find Person
-        Person person = personFinderService.findPerson(personId);
-
-        if (person == null) {
-            if (personId < 4) {
-                throw new IllegalStateException("Database data has not been set up!");
-            }
-            else {
-                throw new Exception("Person " + personId + " does not exist.");
-            }
-        }
-
-        return person;
     }
 }

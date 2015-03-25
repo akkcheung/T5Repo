@@ -8,6 +8,17 @@ import org.apache.tapestry5.corelib.components.RadioGroup;
 import org.apache.tapestry5.dom.Element;	
 import org.apache.tapestry5.services.Environment;
 
+/**
+ * Like all ValidationDecorators, this decorator is invoked for every field being rendered server-side.
+ * 
+ * If the field is "required" then this adds css class "required-field" to the field, "required-field-c" to the field's
+ * containing element, "required-label" to the field's label, and "required-label-c" to the label's containing element.
+ * 
+ * If the field has a validation error detected server-side then this adds css class "error-field" to the field,
+ * "error-field-c" to the field's containing element, "error-label" to the field's label, and "error-label-c" to the
+ * label's containing element.
+ */
+
 public class CustomValidationDecorator extends BaseValidationDecorator {
 
 	private final Environment environment;

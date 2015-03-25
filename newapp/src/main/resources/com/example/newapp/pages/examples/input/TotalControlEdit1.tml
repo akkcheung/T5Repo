@@ -13,8 +13,12 @@
 	The cost is more lines of code in the template. The benefit is total control of the content, layout and style.
 	
 	<div class="eg">
-		<!--  <form t:type="CustomForm" t:id="person" > -->
-		<form t:type="CustomForm" t:id="pform" >
+	
+		<form t:type="CustomForm" t:id="f_person" >
+		<!-- <t:CustomForm t:id="person"> --> 
+		
+		
+		
 			<!-- If optimistic locking is not needed then comment out this next line. It works because Hidden fields are part of the submit. -->
 	 		<t:hidden value="person.version"/>
 	
@@ -65,7 +69,9 @@
 				</tr>
 			</table>
 			<t:errors/>
+			
 		</form>
+		<!-- </t:CustomForm>  -->
 	</div>
 	
 	Person is a JPA Entity Bean and PersonFinderService is an EJB3 Session Bean. <br/><br/>

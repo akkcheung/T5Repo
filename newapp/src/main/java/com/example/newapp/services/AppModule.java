@@ -12,6 +12,7 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ThreadLocale;
+import org.apache.tapestry5.services.LibraryMapping;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
@@ -179,4 +180,14 @@ public class AppModule
   
     		advisor.addTransactionCommitAdvice(receiver);
     }
+    
+    /*
+    public static void contributeComponentClassResolver(Configuration<LibraryMapping> configuration)
+    {
+        // Creates a virtual root pacakge for pages,components.
+        configuration.add(new LibraryMapping("Confirm", "com.example.newapp.web.mixins"));
+    }
+    */
+    
+    
 }

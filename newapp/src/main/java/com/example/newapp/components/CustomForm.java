@@ -13,6 +13,11 @@ import org.apache.tapestry5.services.Environment;
 
 import com.example.newapp.commons.CustomValidationDecorator;
 
+
+/**
+ * CustomForm simply wraps a Form so it can introduce our own custom validation decorator in place of the default one.
+ */
+
 @SupportsInformalParameters
 public class CustomForm implements ClientElement, FormValidationControl  {
 	// Generally useful bits and pieces
