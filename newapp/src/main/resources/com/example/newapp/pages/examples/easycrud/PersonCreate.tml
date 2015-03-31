@@ -11,7 +11,9 @@
     <h1>Create</h1>
     
     <div class="eg">
-        <form t:type="CustomForm" t:id="personForm" class="input">
+        <!-- <form t:type="CustomForm" t:id="personForm" class="input">  -->
+        <form t:type="Form" t:id="personForm" class="input">
+        
             <t:errors/>
     
             <table class="edit">
@@ -55,7 +57,7 @@
                     <th></th>
                     <td colspan="2">
                         <input type="submit" value="Save"/>&nbsp;
-                        <a t:type="pagelink" t:page="together/totalcontrolcrud/Persons" href="#">Cancel</a>
+                        <a t:type="pagelink" t:page="examples/easycrud/Persons" href="#">Cancel</a>
                     </td>
                 </tr>
             </table>

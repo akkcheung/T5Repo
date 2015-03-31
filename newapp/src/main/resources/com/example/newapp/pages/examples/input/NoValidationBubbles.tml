@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <!-- We need a doctype to allow us to use special characters like &nbsp; 
      We use a "strict" DTD to make IE follow the alignment rules. -->
      
@@ -23,8 +24,10 @@
     
     <div class="eg">
         
-        <!--  <form t:type="CustomForm" t:id="names"> -->
-        <t:form t:id="names">
+      
+        <!--  <form t:type="CustomForm" t:id="names"> -->       
+        <!-- <t:CustomForm t:id="names"> -->
+        <form t:type="Form" t:id="names">
         
             <t:errors/>
             <table>
@@ -56,8 +59,9 @@
                 </tr>
             </table>
         
-        <!--  </form>  -->
-        </t:form>
+        </form>
+        <!-- /t:CustomForm>  -->
+       
     </div>
 
     The components add and remove various CSS classes which you can use to control the appearance.<br/>

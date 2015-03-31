@@ -5,10 +5,10 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.example.newapp.components.CustomForm;
-
 import com.example.newapp.entities.IPersonFinderServiceLocal;
 import com.example.newapp.entities.IPersonManagerServiceLocal;
 import com.example.newapp.entities.Person;
@@ -39,9 +39,9 @@ public class TotalControlEdit1 {
     // Generally useful bits and pieces
 
     
-    @Component(id = "f_person")
-    private CustomForm form;
-	
+    @Component(id = "person")
+    //private CustomForm form;
+    private Form form;
 
     //@EJB
     @Inject

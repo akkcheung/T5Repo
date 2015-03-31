@@ -14,9 +14,9 @@
 	
 	<div class="eg">
 	
-		<form t:type="CustomForm" t:id="f_person" >
+		<!-- <form t:type="CustomForm" t:id="f_person" >  -->
 		<!-- <t:CustomForm t:id="person"> --> 
-		
+		<form t:type="Form" t:id="person">
 		
 		
 			<!-- If optimistic locking is not needed then comment out this next line. It works because Hidden fields are part of the submit. -->

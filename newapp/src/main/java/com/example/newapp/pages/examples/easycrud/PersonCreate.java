@@ -3,6 +3,7 @@ package com.example.newapp.pages.examples.easycrud;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.example.newapp.components.CustomForm;
@@ -26,7 +27,8 @@ public class PersonCreate {
     // Generally useful bits and pieces
 
     @Component(id = "personForm")
-    private CustomForm personForm;
+    // private CustomForm personForm;
+    private Form personForm;
 
     //@EJB
     @Inject

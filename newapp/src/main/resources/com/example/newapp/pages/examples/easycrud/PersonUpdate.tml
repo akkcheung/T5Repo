@@ -58,7 +58,7 @@
                         <th>&nbsp;</th>
                         <td colspan="2">
                             <input t:type="submit" value="Save"/>&nbsp;
-                            <a t:type="pageLink" t:page="together/totalcontrolcrud/Persons" href="#">Cancel</a>
+                            <a t:type="pageLink" t:page="examples/easycrud/Persons" href="#">Cancel</a>
                         </td>
                     </tr>
                 </table>

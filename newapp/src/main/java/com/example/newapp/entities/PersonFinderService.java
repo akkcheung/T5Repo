@@ -23,7 +23,8 @@ import com.example.newapp.util.SortCriterion;
 
 public class PersonFinderService implements IPersonFinderServiceLocal {
 
-	@Inject
+	// @Inject
+	@PersistenceContext(unitName = "jumpstart")
     private EntityManager em;
 	
 	public Person findPerson(Long id) {

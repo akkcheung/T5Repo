@@ -1,6 +1,8 @@
 package com.example.newapp.services;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.ioc.Configuration;
@@ -13,6 +15,7 @@ import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ThreadLocale;
 import org.apache.tapestry5.services.LibraryMapping;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
@@ -28,6 +31,7 @@ import com.example.newapp.entities.PersonManagerService;
 import com.example.newapp.util.MoneyTranslator;
 import com.example.newapp.util.YesNoTranslator;
 import com.example.newapp.validators.Letters;
+import com.example.newapp.web.services.AssetProtectionFilter;
 import com.example.newapp.web.services.SelectIdModelFactory;
 import com.example.newapp.web.services.SelectIdModelFactoryImpl;
 
@@ -189,5 +193,19 @@ public class AppModule
     }
     */
     
+    // Tell Tapestry how to block access to WEB-INF/, META-INF/, and assets that are not in our assets "whitelist".
+    // We do this by contributing a custom RequestFilter to Tapestry's RequestHandler service.
+    // - This is necessary due to https://issues.apache.org/jira/browse/TAP5-815 .
+    // - RequestHandler is shown in http://tapestry.apache.org/request-processing.html#RequestProcessing-Overview .
+    // - RequestHandler is described in http://tapestry.apache.org/request-processing.html
+    // - Based on an entry in the Tapestry Users mailing list by martijn.list on 15 Aug 09.
+
+    public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration,
+            PageRenderLinkSource pageRenderLinkSource) {
+        final HashSet<String> ASSETS_WHITE_LIST = new HashSet<String>(Arrays.asList("jpg", "jpeg", "png", "gif", "js",
+                "css", "ico"));
+        configuration.add("AssetProtectionFilter", new AssetProtectionFilter(ASSETS_WHITE_LIST, pageRenderLinkSource),
+                "before:*");
+    }
     
 }
